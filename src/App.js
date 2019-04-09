@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
-import MainComponent from './MainComponent/MainComponent';
-import 'normalize.css';
-import './App.css';
+import React, { Component } from "react";
+import MainComponent from "./MainComponent/MainComponent";
+import "normalize.css";
+import "./App.css";
+import styled from "styled-components";
+
+const Main = styled.main`
+  width: 500px;
+  margin: 0 auto;
+`;
 
 class App extends Component {
   render() {
@@ -10,9 +16,9 @@ class App extends Component {
         <header className="App-header">
           <h1>Shareplay</h1>
         </header>
-        <main className="App-content">
+        <Main className="App-content">
           <MainComponent />
-        </main>
+        </Main>
       </div>
     );
   }

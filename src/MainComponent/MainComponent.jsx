@@ -1,25 +1,25 @@
-import React from 'react';
-import List from './List';
-import Form from './Form';
-import { StateProvider } from '../StateProvider';
+import React from "react";
+import List from "./List";
+import Form from "./Form";
+import { StateProvider } from "../StateProvider";
 
 const MainComponent = () => {
   const initialState = {
     items: [
-      { title: 'foo', tags: ['lorem'] },
-      { title: 'bar', tags: ['ipsum', 'dolor'] }
+      { title: "foo", tags: ["lorem"] },
+      { title: "bar", tags: ["ipsum", "dolor"] }
     ]
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'changeTheme':
+      case "changeTheme":
         return {
           ...state,
           theme: action.newTheme
         };
 
-      case 'addItem':
+      case "addItem":
         return {
           ...state,
           items: [...state.items, action.newItem]
