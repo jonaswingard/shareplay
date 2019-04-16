@@ -16,32 +16,28 @@ const Form = () => {
 	const [tags, setTags] = useState('');
 	const [, dispatch] = useStateValue();
 
+	const clear = () => {
+		setTitle('');
+		setTags('');
+	};
+
+	const getTags = (tags) => tags.split(',').map((tag) => tag.trim());
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
 		dispatch({
 			type: 'addItem',
-			newItem: { title, tags: tags.split(',').map((tag) => tag.trim()) }
+			newItem: { title, tags: getTags(tags) }
 		});
 
-		setTitle('');
-		setTags('');
-	};
-
-	const handleSelect = (item) => {
-		console.log('selected', item);
+		clear();
 	};
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
-				{/* <Input
-          placeholder="Title"
-          value={title}
-          onChange={event => setTitle(event.target.value)}
-        /> */}
-
-				<AutoComplete placeholder="Title" onSelect={handleSelect} />
+				<AutoComplete placeholder="Title" onSelect={(item) => setTitle(item.title)} />
 			</div>
 			<div>
 				<Input
