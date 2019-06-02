@@ -18,6 +18,8 @@ const useAutoComplete = () => {
 
 	const handleChange = (event) => {
 		const value = event.target.value;
+		setValue(value);
+
 		if (value.length >= 3) {
 			updateSearchResult(value);
 		}
