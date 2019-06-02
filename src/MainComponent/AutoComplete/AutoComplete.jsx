@@ -4,8 +4,10 @@ import useAutoComplete from './useAutoComplete';
 
 const Ul = styled.ul`
 	list-style: none;
-	padding: 0;
+	padding: 1rem;
 	margin: 0;
+	border: 1px solid black;
+	border-top: 0;
 `;
 const Button = styled.button`
 	display: flex;

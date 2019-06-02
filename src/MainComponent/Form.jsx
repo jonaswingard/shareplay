@@ -13,6 +13,7 @@ const Input = styled.input`
 
 const Form = () => {
 	const [title, setTitle] = useState('');
+	const [item, setItem] = useState({});
 	const [tags, setTags] = useState('');
 	const [, dispatch] = useStateValue();
 
@@ -28,7 +29,11 @@ const Form = () => {
 
 		dispatch({
 			type: 'addItem',
-			newItem: { title, tags: getTags(tags) }
+			newItem: { ...item, tags: getTags(tags) }
+		});
+
+		dispatch({
+			type: 'saveItems'
 		});
 
 		clear();
@@ -37,7 +42,7 @@ const Form = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
-				<AutoComplete placeholder="Title" onSelect={(item) => setTitle(item.title)} />
+				<AutoComplete placeholder="Title" onSelect={(item) => setItem(item)} />
 			</div>
 			<div>
 				<Input

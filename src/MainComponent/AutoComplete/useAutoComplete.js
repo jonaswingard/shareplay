@@ -31,7 +31,8 @@ const useAutoComplete = () => {
 
 	const handleSelect = (item) => {
 		clear();
-		setValue(item.title);
+		const value = item.title ? item.title : item.name;
+		setValue(value);
 	};
 
 	return { handleChange, searchResult, clear, value, setValue, handleSelect };
