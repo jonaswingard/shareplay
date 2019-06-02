@@ -5,9 +5,9 @@ const useAutoComplete = () => {
 	const [searchResult, setSearchResult] = useState([]);
 	const [value, setValue] = useState('');
 
-	useEffect(() => {
-		setSearchResult(result.results);
-	}, []);
+	// useEffect(() => {
+	// 	setSearchResult(result.results);
+	// }, []);
 
 	const updateSearchResult = (query) => {
 		const url = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`;

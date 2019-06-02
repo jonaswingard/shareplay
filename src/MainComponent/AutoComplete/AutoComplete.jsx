@@ -8,6 +8,11 @@ const Ul = styled.ul`
 	margin: 0;
 	border: 1px solid black;
 	border-top: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: #fff;
+	}
 `;
 const Button = styled.button`
 	display: flex;
@@ -15,6 +20,7 @@ const Button = styled.button`
 	border: none;
 	background: none;
 	width: 100%;
+	text-align: left;
 	:hover {
 		background: #eee;
 	}
@@ -27,11 +33,23 @@ const MetaData = styled.span`
 `;
 const Input = styled.input`
 	width: 100%;
+	box-sizing: border-box;
 `;
+const Container = styled.div`
+	position: relative;
+`;
+
+const Highlight = ({ text, highlight }) => {
+	const splitText = text.toLowerCase().split(highlight);
+	const hText = <span style={{ fontWeight: 'bold' }}>{highlight}</span>;
+	return [splitText[0], hText, splitText[1]].map((item, index) => (
+		<React.Fragment key={index}>{item}</React.Fragment>
+	));
+};
 
 const AutoComplete = ({ placeholder, onSelect }) => {
 	const { handleChange, searchResult, value, handleSelect } = useAutoComplete();
-	const getTitle = (item) => item.title || item.name;
+
 	const getYear = (item) => new Date(item.release_date || item.first_air_date).getFullYear();
 
 	const handleAutoCompleteSelect = (item) => {
@@ -39,23 +57,27 @@ const AutoComplete = ({ placeholder, onSelect }) => {
 		onSelect(item);
 	};
 
+	const isActive = searchResult.length > 0;
+
 	return (
 		<section>
-			<div>
+			<Container>
 				<Input placeholder={placeholder} onChange={handleChange} value={value} />
-			</div>
-			<Ul>
-				{searchResult.map((item, index) => (
-					<li key={index}>
-						<Button onClick={() => handleAutoCompleteSelect(item)}>
-							<Title>
-								{getTitle(item)} ({getYear(item)})
-							</Title>
-							<MetaData>{item.media_type}</MetaData>
-						</Button>
-					</li>
-				))}
-			</Ul>
+				{isActive && (
+					<Ul>
+						{searchResult.map((item, index) => (
+							<li key={index}>
+								<Button onClick={() => handleAutoCompleteSelect(item)}>
+									<Title>
+										<Highlight text={item.title || item.name} highlight={value} /> ({getYear(item)})
+									</Title>
+									<MetaData>{item.media_type}</MetaData>
+								</Button>
+							</li>
+						))}
+					</Ul>
+				)}
+			</Container>
 		</section>
 	);
 };

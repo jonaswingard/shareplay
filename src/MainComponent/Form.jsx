@@ -12,13 +12,12 @@ const Input = styled.input`
 `;
 
 const Form = () => {
-	const [title, setTitle] = useState('');
 	const [item, setItem] = useState({});
 	const [tags, setTags] = useState('');
 	const [, dispatch] = useStateValue();
 
 	const clear = () => {
-		setTitle('');
+		setItem({});
 		setTags('');
 	};
 
